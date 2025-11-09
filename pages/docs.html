@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - LogiChain360</title>
+    <link rel="stylesheet" href="../styles/utility.css">
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo-link">
+                    <img src="../assets/logo.svg" alt="LogiChain360 Logo" class="logo" width="180" height="40">
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="features.html" class="nav-link">Features</a></li>
+                    <li><a href="tracking.html" class="nav-link">Tracking</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="docs.html" class="nav-link active" aria-current="page">Docs</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <span class="theme-icon"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" class="docs-page">
+        <div class="container">
+            <div class="docs-layout">
+                <aside class="docs-sidebar">
+                    <nav class="docs-nav">
+                        <h3>Documentation</h3>
+                        <ul>
+                            <li><a href="#overview">Overview</a></li>
+                            <li><a href="#data-model">Data Model</a></li>
+                            <li><a href="#event-flow">Event Flow</a></li>
+                            <li><a href="#api-integration">API Integration</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <article class="docs-content">
+                    <h1>Developer Documentation</h1>
+                    
+                    <section id="overview" class="doc-section">
+                        <h2>Overview</h2>
+                        <p>LogiChain360 is a full-stack logistics platform demo built with vanilla HTML, CSS, and JavaScript. This documentation explains the data structures, simulation logic, and how to integrate with a real backend API.</p>
+                        <p><strong>Note:</strong> This is a demo build with simulated data. All tracking events, analytics, and shipment movements are generated client-side for demonstration purposes.</p>
+                    </section>
+
+                    <section id="data-model" class="doc-section">
+                        <h2>Data Model</h2>
+                        
+                        <h3>Shipments</h3>
+                        <pre><code>{
+  id: "SHP001",
+  trackingId: "LC360-2025-001",
+  sender: {
+    name: "ABC Traders",
+    city: "Mumbai",
+    address: "123 MG Road"
+  },
+  receiver: {
+    name: "XYZ Stores",
+    city: "Pune",
+    address: "456 FC Road"
+  },
+  assignedDriver: "DRV001",
+  status: "in-transit" | "out-for-delivery" | "delivered",
+  estimatedArrival: "2025-11-09T14:30:00Z",
+  routeCoords: [
+    {x: 20, y: 30},
+    {x: 40, y: 50},
+    // ... path points for map visualization
+  ],
+  weight: 250, // kg
+  priority: "standard" | "express"
+}</code></pre>
+
+                        <h3>Vehicles</h3>
+                        <pre><code>{
+  id: "VEH001",
+  registrationNumber: "MH-01-AB-1234",
+  type: "truck" | "van" | "bike",
+  fuelEfficiency: 12.5, // km/liter
+  lastMaintenance: "2025-10-15",
+  ecoScore: 8.2,
+  currentLocation: {lat: 19.0760, lon: 72.8777}
+}</code></pre>
+
+                        <h3>Drivers</h3>
+                        <pre><code>{
+  id: "DRV001",
+  name: "Rajesh Kumar",
+  rating: 4.8,
+  walletAddress: "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+  onTimePercent: 96.5,
+  totalDeliveries: 1248,
+  earnings: 125000, // INR
+  vehicleAssigned: "VEH001"
+}</code></pre>
+
+                        <h3>Payments (Simulated)</h3>
+                        <pre><code>{
+  id: "PAY001",
+  shipmentId: "SHP001",
+  amount: 450,
+  status: "pending" | "completed" | "failed",
+  method: "digital-wallet" | "cod",
+  timestamp: "2025-11-09T10:00:00Z"
+}</code></pre>
+                    </section>
+
+                    <section id="event-flow" class="doc-section">
+                        <h2>Event Flow for Tracking Simulation</h2>
+                        <p>The tracking page simulates real-time shipment movement using the following flow:</p>
+                        
+                        <h3>1. Initialization</h3>
+                        <p>On page load, the tracking.js module:</p>
+                        <ul>
+                            <li>Fetches mock shipment data from mock-data.js</li>
+                            <li>Renders markers on the map for each active shipment</li>
+                            <li>Populates the shipment list in the sidebar</li>
+                        </ul>
+
+                        <h3>2. Animation Loop</h3>
+                        <p>Every 1000ms (1 second), the system:</p>
+                        <ul>
+                            <li>Advances each marker along its predefined route path</li>
+                            <li>Updates marker position using CSS transforms</li>
+                            <li>Checks if marker has reached waypoints or destination</li>
+                        </ul>
+
+                        <h3>3. Status Transitions</h3>
+                        <p>Shipments automatically transition through statuses:</p>
+                        <ul>
+                            <li><strong>in-transit:</strong> Default state, marker moving along route</li>
+                            <li><strong>out-for-delivery:</strong> Triggered when 80% of route is complete</li>
+                            <li><strong>delivered:</strong> Triggered when marker reaches final coordinate</li>
+                        </ul>
+
+                        <h3>4. Event Notifications</h3>
+                        <p>When status changes occur, the system:</p>
+                        <ul>
+                            <li>Displays a toast notification using components.js</li>
+                            <li>Updates the shipment card UI with new status badge</li>
+                            <li>Logs the event to browser console (for debugging)</li>
+                        </ul>
+                    </section>
+
+                    <section id="api-integration" class="doc-section">
+                        <h2>Integrating with Real API</h2>
+                        <p>To replace mock data with live backend API calls:</p>
+
+                        <h3>Step 1: Update mock-data.js</h3>
+                        <p>Replace the hardcoded export with fetch calls:</p>
+                        <pre><code>// Before (mock):
+export const shipments = [{...}, {...}];
+
+// After (API):
+export async function getShipments() {
+  const response = await fetch('https://api.logichain360.com/v1/shipments');
+  return await response.json();
+}</code></pre>
+
+                        <h3>Step 2: Update tracking.js</h3>
+                        <p>Change imports to use async functions:</p>
+                        <pre><code>// Before:
+import { shipments } from './mock-data.js';
+
+// After:
+import { getShipments } from './mock-data.js';
+const shipments = await getShipments();</code></pre>
+
+                        <h3>Step 3: WebSocket for Real-Time Updates</h3>
+                        <p>For live position updates, use WebSocket connections:</p>
+                        <pre><code>const ws = new WebSocket('wss://api.logichain360.com/tracking');
+
+ws.onmessage = (event) => {
+  const update = JSON.parse(event.data);
+  updateMarkerPosition(update.shipmentId, update.location);
+};</code></pre>
+
+                        <h3>API Endpoints (Future)</h3>
+                        <ul>
+                            <li><code>GET /v1/shipments</code> - List all shipments</li>
+                            <li><code>GET /v1/shipments/:id</code> - Get shipment details</li>
+                            <li><code>GET /v1/drivers</code> - List drivers</li>
+                            <li><code>GET /v1/analytics</code> - Dashboard KPIs</li>
+                            <li><code>POST /v1/contact</code> - Submit contact form</li>
+                        </ul>
+                    </section>
+
+                    <section class="doc-section">
+                        <h2>Further Resources</h2>
+                        <ul>
+                            <li><a href="https://github.com/logichain360/docs">API Reference (Coming Soon)</a></li>
+                            <li><a href="contact.html">Contact Support</a></li>
+                        </ul>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 LogiChain360. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="../scripts/app.js"></script>
+</body>
+</html>

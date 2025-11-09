@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - LogiChain360</title>
+    <link rel="stylesheet" href="../styles/utility.css">
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo-link">
+                    <img src="../assets/logo.svg" alt="LogiChain360 Logo" class="logo" width="180" height="40">
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="features.html" class="nav-link">Features</a></li>
+                    <li><a href="tracking.html" class="nav-link">Tracking</a></li>
+                    <li><a href="dashboard.html" class="nav-link active" aria-current="page">Dashboard</a></li>
+                    <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li><a href="docs.html" class="nav-link">Docs</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <span class="theme-icon"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" class="dashboard-page">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Analytics Dashboard</h1>
+                <p class="page-subtitle">Real-time insights into your logistics operations</p>
+            </div>
+
+            <!-- KPIs -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">On-Time Delivery</div>
+                    <div class="kpi-value">96.8<span class="kpi-unit">%</span></div>
+                    <div class="kpi-trend positive">↑ 2.3% from last month</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Avg. Delivery Time</div>
+                    <div class="kpi-value">2.4<span class="kpi-unit">hrs</span></div>
+                    <div class="kpi-trend positive">↓ 0.3hrs faster</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Active Vehicles</div>
+                    <div class="kpi-value">1,247</div>
+                    <div class="kpi-trend neutral">→ No change</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">CO₂ per km</div>
+                    <div class="kpi-value">142<span class="kpi-unit">g</span></div>
+                    <div class="kpi-trend positive">↓ 8g reduction</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3 class="chart-title">Deliveries (Last 14 Days)</h3>
+                    <canvas id="deliveries-chart" width="600" height="300" aria-label="Line chart showing daily delivery volumes"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3 class="chart-title">CO₂ Emissions by Route</h3>
+                    <canvas id="emissions-chart" width="600" height="300" aria-label="Bar chart showing CO2 emissions per route"></canvas>
+                </div>
+            </div>
+
+            <!-- Top Drivers Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3 class="table-title">Top Drivers Performance</h3>
+                    <button class="btn btn-small" id="sort-toggle">Sort by On-Time %</button>
+                </div>
+                <div class="table-wrapper">
+                    <table id="drivers-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th data-sort="name">Driver Name</th>
+                                <th data-sort="rating">Rating</th>
+                                <th data-sort="ontime">On-Time %</th>
+                                <th data-sort="ecoscore">Eco Score</th>
+                                <th data-sort="earnings">Earnings (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="drivers-tbody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 LogiChain360. All rights reserved. Demo build. Data simulated.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="../scripts/app.js"></script>
+    <script type="module" src="../scripts/dashboard.js"></script>
+</body>
+</html>

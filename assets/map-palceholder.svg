@@ -1,0 +1,42 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#101827"/>
+  
+  <!-- Grid lines -->
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#1f2937" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#grid)"/>
+  
+  <!-- Roads/Routes -->
+  <path d="M100,150 L300,180 L500,200 L650,240" stroke="#374151" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M200,100 L250,250 L300,400 L380,500" stroke="#374151" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M500,100 L520,300 L480,450" stroke="#374151" stroke-width="8" fill="none" stroke-linecap="round"/>
+  
+  <!-- City markers -->
+  <g id="city-mumbai">
+    <circle cx="150" cy="450" r="25" fill="#4f46e5" opacity="0.3"/>
+    <circle cx="150" cy="450" r="15" fill="#4f46e5"/>
+    <text x="150" y="485" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial">Mumbai</text>
+  </g>
+  
+  <g id="city-pune">
+    <circle cx="280" cy="400" r="20" fill="#4f46e5" opacity="0.3"/>
+    <circle cx="280" cy="400" r="12" fill="#4f46e5"/>
+    <text x="280" y="430" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial">Pune</text>
+  </g>
+  
+  <g id="city-delhi">
+    <circle cx="500" cy="120" r="25" fill="#4f46e5" opacity="0.3"/>
+    <circle cx="500" cy="120" r="15" fill="#4f46e5"/>
+    <text x="500" y="155" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial">Delhi</text>
+  </g>
+  
+  <g id="city-bangalore">
+    <circle cx="380" cy="500" r="22" fill="#4f46e5" opacity="0.3"/>
+    <circle cx="380" cy="500" r="13" fill="#4f46e5"/>
+    <text x="380" y="535" text-anchor="middle" fill="#e5e7eb" font-size="12" font-family="Arial">Bangalore</text>
+  </g>
+</svg>
